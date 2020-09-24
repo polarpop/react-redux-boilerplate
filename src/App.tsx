@@ -23,7 +23,10 @@ function App() {
         <ConnectedRouter history={history}>
           <Switch>
             {routes.map((route: AppRoute, index: number) => (
-              <LazyRoute route={{ ...route.props }} component={route.component} key={index}></LazyRoute>
+              <LazyRoute
+                route={{ ...route.props }}
+                component={route.component}
+                key={index}></LazyRoute>
             ))}
           </Switch>
         </ConnectedRouter>

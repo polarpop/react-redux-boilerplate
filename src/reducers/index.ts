@@ -5,11 +5,13 @@ import { routes } from './routes';
 import { history } from '../utils';
 import { connectRouter } from 'connected-react-router'
 
+const router = connectRouter(history);
+
 export const reducers = {
-  user: user,
-  theme: theme,
-  router: connectRouter(history),
-  routes
+  user,
+  theme,
+  routes,
+  router
 };
 
 const rootReducer = combineReducers(reducers);

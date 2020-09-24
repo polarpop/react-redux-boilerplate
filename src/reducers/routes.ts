@@ -1,5 +1,6 @@
 import constants from '../constants';
 import { RouteProps } from 'react-router';
+import { createDefaultReducerState } from '../utils';
 
 export interface AppRoute {
   id: Number;
@@ -11,23 +12,31 @@ export interface AppRoute {
 export interface RouteAction {
   type: string;
   payload: AppRoute;
+  [key: string]: any;
 }
 
-/**
- * @example
- * const defaultState = [{
- * id: 1,
- * component: () => import('../components/AppLoading'),
- * props: {
- *   path: '/',
- *   exact: false
- * },
- * secure: false
- * }]
-*/
-const defaultState: AppRoute[] = [];
+export type RoutesState = AppRoute[];
 
-export function routes(state: AppRoute[] = defaultState, action: RouteAction) {
+/**
+ * A way to use lazy loaded components through routes. This allows for route
+ * guarding, and adding of routes dynamically.
+ * 
+ * @example
+ * import { createDefaultReducerState } from '../utils';
+ * 
+ * const defaultState = createDefaultReducerState<RoutesState>([{
+ *  id: 1,
+ *  component: () => import('../components/AppLoading'),
+ *  props: {
+ *    path: '/',
+ *    exact: false
+ *  },
+ *  secure: false
+ * }]);
+*/
+const defaultState = createDefaultReducerState<RoutesState>([]);
+
+export function routes(state = defaultState, action: RouteAction) {
   switch (action.type) {
     case constants.routes.ROUTE_ADDED:
       const newRoutes = [...state];

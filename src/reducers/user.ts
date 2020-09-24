@@ -5,7 +5,11 @@ export function user(state = {}, action: any) {
     case constants.user.GET_CURRENT_USER:
       return {
         ...action.currentUser
-      }
+      };
+    case constants.user.AUTHENTICATE_USER:
+      return {
+        ...action.currentUser
+      };
     default:
       return state;
   }

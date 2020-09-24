@@ -5,7 +5,7 @@ import { ResponsiveFontSizesOptions } from '@material-ui/core/styles/responsiveF
  * Helper function to add responsive fonts, and create a material-ui theme.
  * 
  * @example
- * import { createTheme } from '../utils';
+ * import { createMaterialTheme } from '../utils';
  * 
  * const theme = {
  *   palette: {
@@ -14,7 +14,7 @@ import { ResponsiveFontSizesOptions } from '@material-ui/core/styles/responsiveF
  *   }
  * };
  * 
- * const muThemeCreator = createTheme(theme);
+ * const muThemeCreator = createMaterialTheme(theme);
  * const withResponsiveFonts = muThemeCreator(true); // or just leave blank
  * const withoutResponsiveFonts = muThemeCreator(false);
  * 

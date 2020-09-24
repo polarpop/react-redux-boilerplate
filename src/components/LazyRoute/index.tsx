@@ -5,16 +5,18 @@ import AppLoading from '../AppLoading';
 type LazyRouteProps = {
   route: RouteProps,
   component: () => Promise<any>
-}
+};
 
-const LazyRoute = ({ route, component }: LazyRouteProps) => {
+const LazyRoute: React.FC<LazyRouteProps> = ({
+  route, component
+}: LazyRouteProps) => {
+
   const LazyComponent = React.lazy(() => component());
 
   return (
-    <React.Suspense fallback={<AppLoading></AppLoading>}>
+    <React.Suspense fallback={<AppLoading />}>
       <Route {...route} component={LazyComponent}></Route>
     </React.Suspense>
-
   );
 }
 
