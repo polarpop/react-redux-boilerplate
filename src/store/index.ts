@@ -1,22 +1,20 @@
 import { RootStateOrAny } from 'react-redux';
-import { createStore, applyMiddleware, compose, Store } from 'redux';
+import { createStore as createReduxStore, applyMiddleware, compose, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import middlewares from '../middleware';
 import rootReducer from '../reducers';
 
-export function configureStore<State = RootStateOrAny>(initialState?: State): Store<State> {
-  let middleware = applyMiddleware(...middlewares);
+export function createStore<State = RootStateOrAny>(
+  initialState?: State
+): Store<State> {
+  const middleware = process.env.NODE_ENV === 'production' ?
+    compose(applyMiddleware(...middlewares)) :
+    composeWithDevTools(applyMiddleware(...middlewares));
 
-  if (process.env.NODE_ENV !== 'production') {
-    middleware = composeWithDevTools(middleware);
-  } else {
-    middleware = compose(middleware);
-  }
-
-  return createStore(
+  return createReduxStore(
     rootReducer,
-    initialState as any,
+    initialState as State,
     middleware
   ) as Store<State>;
 }

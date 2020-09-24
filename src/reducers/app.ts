@@ -15,7 +15,8 @@ export type AppAction = {
     title?: string,
     loading?: boolean,
     theme?: Theme,
-    useResponsiveFonts?: boolean
+    useResponsiveFonts?: boolean,
+    error?: Error
   }
 };
 
@@ -50,7 +51,17 @@ export function app(state: AppState = defaultState, action: AppAction) {
       return {
         ...state,
         title: action.payload.title || "Not Found"
-      }
+      };
+    case constants.app.APP_ERROR_CREATED:
+      return {
+        ...state,
+        error: action.payload.error
+      };
+    case constants.app.APP_ERROR_DISMISSED:
+      return {
+        ...state,
+        error: undefined
+      };
     default:
       return state;
   }

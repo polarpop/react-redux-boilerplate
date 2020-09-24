@@ -1,12 +1,12 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { HelmetProvider, Helmet } from 'react-helmet-async';
+import { HelmetProvider } from 'react-helmet-async';
 
 import { createMaterialTheme, history } from './utils';
 import { App } from './containers';
 
 
-import { configureStore } from './store';
+import { createStore } from './store';
 import { primaryTheme } from './themes';
 
 
@@ -21,7 +21,7 @@ function Main() {
     },
     routes: []
   };
-  const store = configureStore(initialState);
+  const store = createStore(initialState);
   return (
     <Provider store={store}>
       <HelmetProvider>
