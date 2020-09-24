@@ -1,9 +1,9 @@
 import * as user from './user';
-import * as theme from './theme';
 import * as routes from './routes';
+import * as app from './app';
 
 export default {
   user,
-  theme,
-  routes
+  routes,
+  app
 }

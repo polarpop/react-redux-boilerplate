@@ -1,39 +1,34 @@
 import React from 'react';
-import { ThemeProvider, CssBaseline } from '@material-ui/core';
-import { useSelector } from 'react-redux';
-import { Switch } from 'react-router';
+import { Provider } from 'react-redux';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
 
-import { ErrorBoundary, LazyRoute } from './components';
-import { ConnectedRouter } from 'connected-react-router';
-import { history } from './utils';
-import { AppRoute } from './reducers/routes';
+import { createMaterialTheme, history } from './utils';
+import { App } from './containers';
 
-function App() {
-  const theme = useSelector((state: any) => state.theme.theme);
-  const routes = useSelector((state: any) => {
-    if (state.user.authenticated) {
-      return state.routes;
-    }
-    return state.routes.filter((route: any) => !route.secure);
-  });
+
+import { configureStore } from './store';
+import { primaryTheme } from './themes';
+
+
+
+function Main() {
+  const initialState = {
+    app: {
+      theme: createMaterialTheme(primaryTheme)(),
+      useResponsiveFonts: true,
+      title: 'Loading...',
+      loading: true
+    },
+    routes: []
+  };
+  const store = configureStore(initialState);
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <ErrorBoundary>
-        <ConnectedRouter history={history}>
-          <Switch>
-            {routes.map((route: AppRoute, index: number) => (
-              <LazyRoute
-                route={{ ...route.props }}
-                component={route.component}
-                key={index}></LazyRoute>
-            ))}
-          </Switch>
-        </ConnectedRouter>
-      </ErrorBoundary>
-    </ThemeProvider>
+    <Provider store={store}>
+      <HelmetProvider>
+        <App history={history} />
+      </HelmetProvider>
+    </Provider>
   );
-
 }
 
-export default App;
+export default Main;
