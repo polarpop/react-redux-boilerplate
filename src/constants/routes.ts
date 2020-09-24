@@ -1,0 +1,2 @@
+export const ROUTE_ADDED = "ROUTE_ADDED";
+export const ROUTE_REPLACED = "ROUTE_REPLACED";

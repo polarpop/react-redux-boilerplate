@@ -1,0 +1,1 @@
+export { primary as primaryTheme } from './primary';

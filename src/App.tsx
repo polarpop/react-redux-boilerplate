@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider, CssBaseline } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { Switch } from 'react-router';
+
+import { ErrorBoundary, LazyRoute } from './components';
+import { ConnectedRouter } from 'connected-react-router';
+import { history } from './utils';
+import { AppRoute } from './reducers/routes';
 
 function App() {
+  const theme = useSelector((state: any) => state.theme.theme);
+  const routes = useSelector((state: any) => {
+    if (state.user.authenticated) {
+      return state.routes;
+    }
+    return state.routes.filter((route: any) => !route.secure);
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <ErrorBoundary>
+        <ConnectedRouter history={history}>
+          <Switch>
+            {routes.map((route: AppRoute, index: number) => (
+              <LazyRoute route={{ ...route.props }} component={route.component} key={index}></LazyRoute>
+            ))}
+          </Switch>
+        </ConnectedRouter>
+      </ErrorBoundary>
+    </ThemeProvider>
   );
+
 }
 
 export default App;
