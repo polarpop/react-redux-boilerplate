@@ -15,11 +15,12 @@ function Main() {
   const initialState = {
     app: {
       theme: createMaterialTheme(primaryTheme)(),
-      useResponsiveFonts: true,
-      title: 'Loading...',
+      title: 'Welcome!',
       loading: true
     },
-    routes: []
+    router: {
+      routes: []
+    }
   };
   const store = createStore(initialState);
   return (

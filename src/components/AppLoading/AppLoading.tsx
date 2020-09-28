@@ -1,11 +1,27 @@
-import { CircularProgress, Container } from '@material-ui/core';
 import React from 'react';
-import './AppLoading.scss';
+import { CircularProgress, Container, makeStyles, Theme, createStyles } from '@material-ui/core';
 
-export const AppLoading: React.FC = () => (
-  <Container maxWidth="xl">
-    <div className={'app-loading-container'}>
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  container: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    height: "100vh",
+    alignItems: 'center',
+    justifyContent: 'center',
+    verticalAlign: 'middle',
+    display: 'flex'
+  }
+}))
+
+export const AppLoading: React.FC = () => {
+
+  const classes = useStyles();
+
+  return (
+    <Container maxWidth="xl" className={classes.container}>
       <CircularProgress></CircularProgress>
-    </div>
-  </Container>
-);
+    </Container>
+  );
+};

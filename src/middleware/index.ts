@@ -1,14 +1,16 @@
-import loggingMiddleware from './logger';
 import thunkMiddleware from 'redux-thunk';
 import routerMiddleware from './router';
+import { createLogger } from 'redux-logger';
+import { history } from '../utils';
+import { Middleware } from 'redux';
 
-const middleware = [
+const middleware: Middleware[] = [
   thunkMiddleware,
-  routerMiddleware
+  routerMiddleware(history)
 ];
 
 if (process.env.NODE_ENV !== 'production') {
-  middleware.push(loggingMiddleware);
+  middleware.push(createLogger());
 }
 
 export default middleware;
