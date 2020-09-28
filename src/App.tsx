@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
 
-import { createMaterialTheme, history } from './utils';
+import { createMaterialTheme, history, generateRouteId } from './utils';
 import { App } from './containers';
 
 
@@ -18,7 +18,14 @@ function Main() {
       title: 'Welcome!',
       loading: true
     },
-    routes: [],
+    routes: [{
+      id: generateRouteId(),
+      component: () => import('./containers/NotFound'),
+      secure: false,
+      props: {
+        path: '*'
+      }
+    }],
     user: {}
   };
   const store = createStore(initialState);
