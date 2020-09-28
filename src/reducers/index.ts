@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
-import { router } from './router';
+import router from './router';
 import { app } from './app';
 
 
 export const reducers = {
   app,
-  router
+  ...router
 };
 
 const rootReducer = combineReducers(reducers);

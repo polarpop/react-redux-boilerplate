@@ -6,7 +6,7 @@ import { createMaterialTheme } from '../../utils';
 const { app } = constants;
 
 export default function theme(
-  state: reducer.State<Theme>,
+  state: Partial<reducer.State<Theme>> = {},
   action: reducer.Action<{
     theme?: ThemeOptions,
     useResponsiveFonts?: boolean

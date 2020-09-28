@@ -9,18 +9,17 @@ import { App } from './containers';
 import { createStore } from './store';
 import { primaryTheme } from './themes';
 
-
+const theme = createMaterialTheme(primaryTheme)();
 
 function Main() {
   const initialState = {
     app: {
-      theme: createMaterialTheme(primaryTheme)(),
+      theme,
       title: 'Welcome!',
       loading: true
     },
-    router: {
-      routes: []
-    }
+    routes: [],
+    user: {}
   };
   const store = createStore(initialState);
   return (

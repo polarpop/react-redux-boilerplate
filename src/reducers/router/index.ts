@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import { default as routerReducer } from './router';
 import { default as routes } from './routes';
 
@@ -7,4 +6,4 @@ const reducers = {
   routes
 };
 
-export const router = combineReducers(reducers);
+export default reducers;

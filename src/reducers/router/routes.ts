@@ -1,24 +1,25 @@
 import constants from '../../constants';
-import { reducer, routes as Routes } from '../../types';
+import { reducer } from '../../types';
+import { Routes } from '../../types/routes'
 
 export default function routes(
-  state: reducer.State<Routes.RouteState[]> = [],
-  action: reducer.Action<Routes.RouteState>
+  state: reducer.State<Routes.Route[]> = [],
+  action: reducer.Action<Routes.Route>
 ) {
   switch (action.type) {
     case constants.routes.ROUTE_ADDED:
-      if (!state.find((route: any, index: number) => action.payload.id === index)) {
+      if (!state.find((route: Routes.Route) => action.payload.id === route.id)) {
         return [
           ...state,
           action.payload
-        ] as Routes.RouteState[];
+        ] as Routes.Route[];
       }
       return state;
     case constants.routes.ROUTE_REPLACED:
       return state.filter(
-        (route: any, index: number) => action.payload.id !== index
-      ) as Routes.RouteState[];
+        (route: Routes.Route, index: number) => action.payload.id !== index
+      ) as Routes.Route[];
     default:
-      return state;
+      return state as Routes.Route[];
   }
 }
