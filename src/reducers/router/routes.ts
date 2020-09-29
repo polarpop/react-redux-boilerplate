@@ -17,7 +17,7 @@ export default function routes(
       return state;
     case constants.routes.ROUTE_REPLACED:
       return state.filter(
-        (route: Routes.Route, index: number) => action.payload.id !== index
+        (route: Routes.Route, index: number) => action.payload.id !== route.id
       ) as Routes.Route[];
     default:
       return state as Routes.Route[];
