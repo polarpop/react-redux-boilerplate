@@ -1,7 +1,7 @@
 import thunkMiddleware from 'redux-thunk';
 import routerMiddleware from './router';
-import { createLogger } from 'redux-logger';
 import { history } from '../utils';
+import { createLogger } from 'redux-logger';
 import { Middleware } from 'redux';
 
 const middleware: Middleware[] = [

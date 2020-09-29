@@ -1,1 +1,1 @@
-export { onAppLoading, onThemeChange, onAppError, onAppErrorDismissed, onTitleChange } from './app';
+export { onAppLoading, onThemeChange, onAppError, onAppErrorDismissed } from './app';

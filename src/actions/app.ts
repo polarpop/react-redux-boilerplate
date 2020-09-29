@@ -29,8 +29,3 @@ export const onThemeChange = ({
     useResponsiveFonts
   }
 });
-
-export const onTitleChange = (title: string): reducer.Action<string> => ({
-  type: constants.app.APP_TITLE_CHANGE,
-  payload: title
-});
